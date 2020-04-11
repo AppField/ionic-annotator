@@ -73,7 +73,7 @@ const Annotator: React.FC<AnnotatorProps> = ({ index }) => {
         <IonCardTitle>{item[3]}</IonCardTitle>
         <IonCardSubtitle>
           <a target="_blank" href={item[4]} rel="noopener noreferrer">
-            Im {item[2]} &ouml;ffnen
+            Zeitung: {item[2]}
           </a>
         </IonCardSubtitle>
       </IonCardHeader>
