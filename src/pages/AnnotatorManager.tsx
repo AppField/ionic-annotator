@@ -11,12 +11,12 @@ import Annotator from "../components/Annotator";
 import { getLocalData } from "../localStorage";
 
 interface AnnotateContextI {
-  annotate: any[];
-  setAnnotate: Dispatch<SetStateAction<any[]>>;
+  annotate: any[] | null;
+  setAnnotate: Dispatch<SetStateAction<any[] | null>>;
 }
 
 const initialState: AnnotateContextI = {
-  annotate: [],
+  annotate: getLocalData(),
   setAnnotate: (): void => {},
 };
 
@@ -26,29 +26,25 @@ export const useAnnotateContext = (): AnnotateContextI => {
   return useContext(AnnotateContext);
 };
 
-// export const AnnotateProvider: React.FC = ({ children }) => {
-//   const [annotate, setAnnotate] = useState<any[]>([]);
-//   return (
-//     <AnnotateContext.Provider value={{ annotate, setAnnotate }}>
-//       {children}
-//     </AnnotateContext.Provider>
-//   );
-// };
-
 const AnnotatorManager: React.FC = () => {
-  const data = getLocalData();
-  const [annotate, setAnnotate] = useState<any[]>(data);
+  const [annotate, setAnnotate] = useState<any[] | null>(null)!;
 
   useEffect(() => {
-    localStorage.setItem("data", JSON.stringify(annotate));
-  }, [annotate]);
-
-  const nextItem = annotate.find((item) => item[7] == null);
+    if (annotate) {
+      localStorage.setItem("data", JSON.stringify(annotate));
+    }
+  });
 
   return (
     <AnnotateContext.Provider value={{ annotate, setAnnotate }}>
       <Layout title="Sentiment Annotator">
-        {annotate.length === 0 ? <Uploader /> : <Annotator item={nextItem} />}
+        {!annotate || annotate?.length === 0 ? (
+          <Uploader />
+        ) : (
+          <Annotator
+            index={annotate?.findIndex((item) => item[7] === "") || 0}
+          />
+        )}
       </Layout>
     </AnnotateContext.Provider>
   );

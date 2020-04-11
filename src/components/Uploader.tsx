@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from "react";
+import React, { useState } from "react";
 import {
   IonCard,
   IonCardContent,
@@ -7,7 +7,7 @@ import {
   IonButton,
 } from "@ionic/react";
 import { CSVReader } from "react-papaparse";
-import { useAnnotateContext } from "../pages/Annotator";
+import { useAnnotateContext } from "../pages/AnnotatorManager";
 
 const Uploader: React.FC = () => {
   const { setAnnotate } = useAnnotateContext();

@@ -18,7 +18,7 @@ import "@ionic/react/css/display.css";
 
 /* Theme variables */
 import "./theme/variables.css";
-import AnnotatorManager from "./pages/Annotator";
+import AnnotatorManager from "./pages/AnnotatorManager";
 
 const App: React.FC = () => (
   <IonApp>

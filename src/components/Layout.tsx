@@ -12,8 +12,7 @@ import {
 } from "@ionic/react";
 import styled from "styled-components";
 import { trashOutline } from "ionicons/icons";
-import { useAnnotateContext } from "../pages/Annotator";
-import { getLocalData } from "../localStorage";
+import { useAnnotateContext } from "../pages/AnnotatorManager";
 
 const StyledContent = styled(IonContent)`
   max-width: 1024px;
@@ -37,20 +36,22 @@ const Layout: React.FC<LayoutProps> = ({ children, title }) => {
       <IonHeader>
         <StyledToolbar>
           <IonTitle color="primary">{title}</IonTitle>
-          {annotate.length > 0 && (
-            <IonButtons slot="end">
-              <IonButton onClick={() => setAnnotate([])}>
-                <IonIcon slot="start" icon={trashOutline} />
-                Daten L&ouml;schen
-              </IonButton>
-            </IonButtons>
-          )}
+          {!annotate ||
+            (annotate.length > 0 && (
+              <IonButtons slot="end">
+                <IonButton onClick={() => setAnnotate([])}>
+                  <IonIcon slot="start" icon={trashOutline} />
+                </IonButton>
+              </IonButtons>
+            ))}
         </StyledToolbar>
       </IonHeader>
       <StyledContent>
         <IonHeader collapse="condense">
           <StyledToolbar>
-            <IonTitle size="large">{title}</IonTitle>
+            <IonTitle size="large" color="primary">
+              {title}
+            </IonTitle>
           </StyledToolbar>
         </IonHeader>
         {children}
