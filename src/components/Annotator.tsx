@@ -82,7 +82,7 @@ const Annotator: React.FC<AnnotatorProps> = ({ index }) => {
         </IonCardHeader>
         <IonCardContent>
           <div className="ion-margin">
-            <StyledText>{item[6]}</StyledText>
+            <StyledText>{item[5]}</StyledText>
           </div>
         </IonCardContent>
 
