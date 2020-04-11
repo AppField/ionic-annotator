@@ -1,7 +1,6 @@
 {
-  "homepage": "https://appfield.github.io/ionic-react-boilerplate-tab/",
-  "name": "ionic-react-boilerplate",
-  "version": "0.0.1",
+  "name": "ionic-annotator",
+  "version": "1.0.0",
   "private": true,
   "dependencies": {
     "@ionic/react": "^5.0.7",
