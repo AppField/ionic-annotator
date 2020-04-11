@@ -16,11 +16,14 @@
     "@types/react-router": "^5.1.5",
     "@types/react-router-dom": "^5.1.4",
     "ionicons": "^5.0.1",
+    "papaparse": "^5.2.0",
     "react": "^16.13.1",
     "react-dom": "^16.13.1",
+    "react-papaparse": "^3.0.2",
     "react-router": "^5.1.2",
     "react-router-dom": "^5.1.2",
     "react-scripts": "3.4.1",
+    "styled-components": "^5.1.0",
     "typescript": "3.8.3"
   },
   "scripts": {
@@ -48,6 +51,8 @@
   },
   "description": "An Ionic project",
   "devDependencies": {
+    "@types/papaparse": "^5.0.3",
+    "@types/styled-components": "^5.0.1",
     "gh-pages": "^2.2.0"
   }
 }

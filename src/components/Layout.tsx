@@ -4,30 +4,57 @@ import {
   IonHeader,
   IonToolbar,
   IonTitle,
-  IonContent
+  IonContent,
+  isPlatform,
+  IonButtons,
+  IonButton,
+  IonIcon,
 } from "@ionic/react";
-import "./Layout.css";
+import styled from "styled-components";
+import { trashOutline } from "ionicons/icons";
+import { useAnnotateContext } from "../pages/Annotator";
+import { getLocalData } from "../localStorage";
+
+const StyledContent = styled(IonContent)`
+  max-width: 1024px;
+  align-self: center;
+  padding: 1rem;
+`;
+
+const StyledToolbar = styled(IonToolbar)`
+  ${() => isPlatform("ios") && `--background: translucent`}
+`;
 
 interface LayoutProps {
   title: string;
 }
 
 const Layout: React.FC<LayoutProps> = ({ children, title }) => {
+  const { annotate, setAnnotate } = useAnnotateContext();
+
   return (
     <IonPage>
       <IonHeader>
-        <IonToolbar>
-          <IonTitle>{title}</IonTitle>
-        </IonToolbar>
+        <StyledToolbar>
+          <IonTitle color="primary">{title}</IonTitle>
+          {annotate.length > 0 && (
+            <IonButtons slot="end">
+              <IonButton onClick={() => setAnnotate([])}>
+                <IonIcon slot="start" icon={trashOutline} />
+                Daten L&ouml;schen
+              </IonButton>
+            </IonButtons>
+          )}
+        </StyledToolbar>
       </IonHeader>
-      <IonContent>
+      <StyledContent>
         <IonHeader collapse="condense">
-          <IonToolbar>
+          <StyledToolbar>
             <IonTitle size="large">{title}</IonTitle>
-          </IonToolbar>
+          </StyledToolbar>
         </IonHeader>
         {children}
-      </IonContent>
+      </StyledContent>
     </IonPage>
   );
 };
