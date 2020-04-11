@@ -48,7 +48,9 @@ const Layout: React.FC<LayoutProps> = ({ children, title }) => {
         translucent={true}
         onDidDismiss={() => setShowPopover({ isOpen: false, event: undefined })}
       >
-        <MenuPopover />
+        <MenuPopover
+          onClick={() => setShowPopover({ isOpen: false, event: undefined })}
+        />
       </IonPopover>
       <IonPage>
         <IonHeader>
@@ -63,7 +65,7 @@ const Layout: React.FC<LayoutProps> = ({ children, title }) => {
                 >
                   <IonIcon
                     color="primary"
-                    slot="start"
+                    slot="icon-only"
                     icon={ellipsisVertical}
                   />
                 </IonButton>

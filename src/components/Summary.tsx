@@ -19,8 +19,9 @@ const StyledNumbers = styled.p`
 const Summary: React.FC = () => {
   const { annotate } = useAnnotateContext();
 
-  const annotated = annotate.filter((item) => item[7] !== "").length;
-  const total = annotate.length;
+  const annotated = annotate.findIndex((item) => item[7] === "") - 1;
+
+  const total = annotate.length - 1;
 
   return (
     <StyledDiv>

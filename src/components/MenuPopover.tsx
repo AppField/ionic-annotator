@@ -4,7 +4,11 @@ import { downloadOutline, trashOutline } from "ionicons/icons";
 import { useAnnotateContext } from "../pages/AnnotatorManager";
 import { downloadCsv } from "../utils/utils";
 
-const MenuPopover: React.FC = () => {
+interface MenuPopoverProps {
+  onClick: () => any;
+}
+
+const MenuPopover: React.FC<MenuPopoverProps> = ({ onClick }) => {
   const { annotate, setAnnotate } = useAnnotateContext();
   const [showAlert, setShowAlert] = useState(false);
 
@@ -12,7 +16,7 @@ const MenuPopover: React.FC = () => {
     <>
       <IonAlert
         isOpen={showAlert}
-        onDidDismiss={() => setShowAlert(false)}
+        // onDidDismiss={() => setShowAlert(false)}
         header="Daten wirklich löschen?"
         message="Die Daten werden unwiderruflich gelöscht."
         buttons={[
@@ -20,11 +24,15 @@ const MenuPopover: React.FC = () => {
             text: "Löschen",
             handler: () => {
               setAnnotate([]);
+              onClick();
             },
           },
           {
             text: "Abbrechen",
             role: "cancel",
+            handler: () => {
+              onClick();
+            },
           },
         ]}
       />
@@ -34,12 +42,18 @@ const MenuPopover: React.FC = () => {
           button
           onClick={() => {
             downloadCsv(annotate);
+            onClick();
           }}
         >
           <IonIcon slot="start" icon={trashOutline} />
           <IonLabel>Herunterladen</IonLabel>
         </IonItem>
-        <IonItem button onClick={() => setShowAlert(true)}>
+        <IonItem
+          button
+          onClick={() => {
+            setShowAlert(true);
+          }}
+        >
           <IonIcon slot="start" icon={downloadOutline} />
           <IonLabel>Daten L&ouml;schen</IonLabel>
         </IonItem>

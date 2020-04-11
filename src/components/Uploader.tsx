@@ -33,7 +33,14 @@ const Uploader: React.FC = () => {
         {csv.length > 0 && (
           <IonButton
             class="ion-margin ion-float-right"
-            onClick={() => setAnnotate(csv.map((c: { data: any[] }) => c.data))}
+            onClick={() => {
+              const copy = csv.map((c: { data: any[] }) => c.data) as any[];
+              if (copy[copy.length - 1].length !== 8) {
+                copy.pop();
+              }
+
+              setAnnotate(copy);
+            }}
           >
             CSV verwenden
           </IonButton>
