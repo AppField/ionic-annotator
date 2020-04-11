@@ -36,14 +36,13 @@ const Layout: React.FC<LayoutProps> = ({ children, title }) => {
       <IonHeader>
         <StyledToolbar>
           <IonTitle color="primary">{title}</IonTitle>
-          {!annotate ||
-            (annotate.length > 0 && (
-              <IonButtons slot="end">
-                <IonButton onClick={() => setAnnotate([])}>
-                  <IonIcon slot="start" icon={trashOutline} />
-                </IonButton>
-              </IonButtons>
-            ))}
+          {annotate.length > 0 && (
+            <IonButtons slot="end">
+              <IonButton onClick={() => setAnnotate([])}>
+                <IonIcon slot="start" icon={trashOutline} />
+              </IonButton>
+            </IonButtons>
+          )}
         </StyledToolbar>
       </IonHeader>
       <StyledContent>

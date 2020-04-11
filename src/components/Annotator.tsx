@@ -149,7 +149,7 @@ const Annotator: React.FC<AnnotatorProps> = ({ index }) => {
               } else if (sentiments.isUnkown) {
                 sentiment = Sentiments.UNKOWN;
               }
-              if (sentiment && annotate) {
+              if (sentiment && annotate.length) {
                 const updated = [...annotate];
                 updated[index][7] = sentiment;
 
