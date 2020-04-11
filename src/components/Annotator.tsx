@@ -87,7 +87,7 @@ const Annotator: React.FC<AnnotatorProps> = ({ index }) => {
         </IonCardContent>
 
         <IonToolbar>
-          <IonButtons slot="start">
+          <IonButtons>
             <IonButton
               color="danger"
               fill={getFill(sentiments.isNegative)}
@@ -134,8 +134,8 @@ const Annotator: React.FC<AnnotatorProps> = ({ index }) => {
             >
               Unbekannt
             </IonButton>
-          </IonButtons>
-          <IonButtons slot="end">
+            {/* </IonButtons>
+          <IonButtons slot="end"> */}
             <IonButton
               color="primary"
               fill="solid"
@@ -159,6 +159,7 @@ const Annotator: React.FC<AnnotatorProps> = ({ index }) => {
                   const updated = [...annotate];
                   updated[index][7] = sentiment;
 
+                  setSentiments(defaultSentiments);
                   setAnnotate(updated);
                 }
               }}
