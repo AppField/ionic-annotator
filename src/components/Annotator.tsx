@@ -9,6 +9,7 @@ import {
   IonButtons,
   IonToolbar,
   IonAlert,
+  IonToast,
 } from "@ionic/react";
 import styled from "styled-components";
 import { useAnnotateContext } from "../pages/AnnotatorManager";
@@ -48,6 +49,7 @@ const defaultSentiments = {
 
 const Annotator: React.FC<AnnotatorProps> = ({ index }) => {
   const { annotate, setAnnotate } = useAnnotateContext();
+  const [showToast, setShowToast] = useState(false);
 
   const [sentiments, setSentiments] = useState<SentimentStates>(
     defaultSentiments
@@ -68,100 +70,111 @@ const Annotator: React.FC<AnnotatorProps> = ({ index }) => {
   const item = annotate ? annotate[index] : null;
 
   return (
-    <IonCard>
-      <IonCardHeader>
-        <IonCardTitle>{item[3]}</IonCardTitle>
-        <IonCardSubtitle>
-          <a target="_blank" href={item[4]} rel="noopener noreferrer">
-            Zeitung: {item[2]}
-          </a>
-        </IonCardSubtitle>
-      </IonCardHeader>
-      <IonCardContent>
-        <div className="ion-margin">
-          <StyledText>{item[6]}</StyledText>
-        </div>
-      </IonCardContent>
+    <>
+      <IonCard>
+        <IonCardHeader>
+          <IonCardTitle>{item[3]}</IonCardTitle>
+          <IonCardSubtitle>
+            <a target="_blank" href={item[4]} rel="noopener noreferrer">
+              Zeitung: {item[2]}
+            </a>
+          </IonCardSubtitle>
+        </IonCardHeader>
+        <IonCardContent>
+          <div className="ion-margin">
+            <StyledText>{item[6]}</StyledText>
+          </div>
+        </IonCardContent>
 
-      <IonToolbar>
-        <IonButtons slot="start">
-          <IonButton
-            color="danger"
-            fill={getFill(sentiments.isNegative)}
-            onClick={() =>
-              setSentiments({
-                ...defaultSentiments,
-                isNegative: true,
-              } as SentimentStates)
-            }
-          >
-            Negativ
-          </IonButton>
-          <IonButton
-            fill={getFill(sentiments.isNeutral)}
-            onClick={() =>
-              setSentiments({
-                ...defaultSentiments,
-                isNeutral: true,
-              } as SentimentStates)
-            }
-          >
-            Neutral
-          </IonButton>
-          <IonButton
-            color="success"
-            fill={getFill(sentiments.isPositive)}
-            onClick={() =>
-              setSentiments({
-                ...defaultSentiments,
-                isPositive: true,
-              } as SentimentStates)
-            }
-          >
-            Positiv
-          </IonButton>
-          <IonButton
-            fill={getFill(sentiments.isUnkown)}
-            onClick={() =>
-              setSentiments({
-                ...defaultSentiments,
-                isUnkown: true,
-              } as SentimentStates)
-            }
-          >
-            Unbekannt
-          </IonButton>
-        </IonButtons>
-        <IonButtons slot="end">
-          <IonButton
-            color="primary"
-            fill="solid"
-            slot="primary"
-            onClick={() => {
-              let sentiment: Sentiments = null!;
-
-              if (sentiments.isNegative) {
-                sentiment = Sentiments.NEGATIVE;
-              } else if (sentiments.isNeutral) {
-                sentiment = Sentiments.NEUTRAL;
-              } else if (sentiments.isPositive) {
-                sentiment = Sentiments.POSITIVE;
-              } else if (sentiments.isUnkown) {
-                sentiment = Sentiments.UNKOWN;
+        <IonToolbar>
+          <IonButtons slot="start">
+            <IonButton
+              color="danger"
+              fill={getFill(sentiments.isNegative)}
+              onClick={() =>
+                setSentiments({
+                  ...defaultSentiments,
+                  isNegative: true,
+                } as SentimentStates)
               }
-              if (sentiment && annotate.length) {
-                const updated = [...annotate];
-                updated[index][7] = sentiment;
-
-                setAnnotate(updated);
+            >
+              Negativ
+            </IonButton>
+            <IonButton
+              fill={getFill(sentiments.isNeutral)}
+              onClick={() =>
+                setSentiments({
+                  ...defaultSentiments,
+                  isNeutral: true,
+                } as SentimentStates)
               }
-            }}
-          >
-            Weiter
-          </IonButton>
-        </IonButtons>
-      </IonToolbar>
-    </IonCard>
+            >
+              Neutral
+            </IonButton>
+            <IonButton
+              color="success"
+              fill={getFill(sentiments.isPositive)}
+              onClick={() =>
+                setSentiments({
+                  ...defaultSentiments,
+                  isPositive: true,
+                } as SentimentStates)
+              }
+            >
+              Positiv
+            </IonButton>
+            <IonButton
+              fill={getFill(sentiments.isUnkown)}
+              onClick={() =>
+                setSentiments({
+                  ...defaultSentiments,
+                  isUnkown: true,
+                } as SentimentStates)
+              }
+            >
+              Unbekannt
+            </IonButton>
+          </IonButtons>
+          <IonButtons slot="end">
+            <IonButton
+              color="primary"
+              fill="solid"
+              slot="primary"
+              onClick={() => {
+                let sentiment: Sentiments = null!;
+
+                if (sentiments.isNegative) {
+                  sentiment = Sentiments.NEGATIVE;
+                } else if (sentiments.isNeutral) {
+                  sentiment = Sentiments.NEUTRAL;
+                } else if (sentiments.isPositive) {
+                  sentiment = Sentiments.POSITIVE;
+                } else if (sentiments.isUnkown) {
+                  sentiment = Sentiments.UNKOWN;
+                } else {
+                  setShowToast(true);
+                }
+
+                if (sentiment && annotate.length) {
+                  const updated = [...annotate];
+                  updated[index][7] = sentiment;
+
+                  setAnnotate(updated);
+                }
+              }}
+            >
+              Weiter
+            </IonButton>
+          </IonButtons>
+        </IonToolbar>
+      </IonCard>
+
+      <IonToast
+        isOpen={showToast}
+        onDidDismiss={() => setShowToast(false)}
+        message="Bitte den Artikel einer Stimmung zuordnen. Danke :)"
+      />
+    </>
   );
 };
 
