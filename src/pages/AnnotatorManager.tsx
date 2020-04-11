@@ -9,6 +9,8 @@ import Layout from "../components/Layout";
 import Uploader from "../components/Uploader";
 import Annotator from "../components/Annotator";
 import { getLocalData } from "../localStorage";
+import Summary from "../components/Summary";
+import Gratulation from "../components/Gratulation";
 
 interface AnnotateContextI {
   annotate: any[];
@@ -40,8 +42,13 @@ const AnnotatorManager: React.FC = () => {
       <Layout title="Sentiment Annotator">
         {annotate.length === 0 ? (
           <Uploader />
+        ) : nextItemIndex !== -1 ? (
+          <>
+            <Annotator index={nextItemIndex} />
+            <Summary />
+          </>
         ) : (
-          <Annotator index={nextItemIndex} />
+          <Gratulation />
         )}
       </Layout>
     </AnnotateContext.Provider>

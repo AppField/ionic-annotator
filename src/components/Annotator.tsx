@@ -168,8 +168,7 @@ const Annotator: React.FC<AnnotatorProps> = ({ index }) => {
             Weiter
           </IonButton>
         </IonToolbar>
-      </IonCard>
-
+      </IonCard>      
       <IonToast
         isOpen={showToast}
         onDidDismiss={() => setShowToast(false)}

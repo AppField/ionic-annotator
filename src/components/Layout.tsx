@@ -61,7 +61,11 @@ const Layout: React.FC<LayoutProps> = ({ children, title }) => {
                     setShowPopover({ isOpen: true, event: event.nativeEvent })
                   }
                 >
-                  <IonIcon color="primary" slot="start" icon={ellipsisVertical} />
+                  <IonIcon
+                    color="primary"
+                    slot="start"
+                    icon={ellipsisVertical}
+                  />
                 </IonButton>
               </IonButtons>
             )}
