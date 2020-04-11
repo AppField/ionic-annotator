@@ -174,6 +174,7 @@ const Annotator: React.FC<AnnotatorProps> = ({ index }) => {
         isOpen={showToast}
         onDidDismiss={() => setShowToast(false)}
         message="Bitte den Artikel einer Stimmung zuordnen. Danke :)"
+        duration={3000}
       />
     </>
   );
