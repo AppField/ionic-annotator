@@ -87,7 +87,7 @@ const Annotator: React.FC<AnnotatorProps> = ({ index }) => {
         </IonCardContent>
 
         <IonToolbar>
-          <IonButtons>
+          <IonButtons class="ion-justify-content-evenly">
             <IonButton
               color="danger"
               fill={getFill(sentiments.isNegative)}
@@ -134,39 +134,39 @@ const Annotator: React.FC<AnnotatorProps> = ({ index }) => {
             >
               Unbekannt
             </IonButton>
-            {/* </IonButtons>
-          <IonButtons slot="end"> */}
-            <IonButton
-              color="primary"
-              fill="solid"
-              slot="primary"
-              onClick={() => {
-                let sentiment: Sentiments = null!;
-
-                if (sentiments.isNegative) {
-                  sentiment = Sentiments.NEGATIVE;
-                } else if (sentiments.isNeutral) {
-                  sentiment = Sentiments.NEUTRAL;
-                } else if (sentiments.isPositive) {
-                  sentiment = Sentiments.POSITIVE;
-                } else if (sentiments.isUnkown) {
-                  sentiment = Sentiments.UNKOWN;
-                } else {
-                  setShowToast(true);
-                }
-
-                if (sentiment && annotate.length) {
-                  const updated = [...annotate];
-                  updated[index][7] = sentiment;
-
-                  setSentiments(defaultSentiments);
-                  setAnnotate(updated);
-                }
-              }}
-            >
-              Weiter
-            </IonButton>
           </IonButtons>
+        </IonToolbar>
+        <IonToolbar>
+          <IonButton
+            expand="block"
+            color="primary"
+            fill="clear"
+            onClick={() => {
+              let sentiment: Sentiments = null!;
+
+              if (sentiments.isNegative) {
+                sentiment = Sentiments.NEGATIVE;
+              } else if (sentiments.isNeutral) {
+                sentiment = Sentiments.NEUTRAL;
+              } else if (sentiments.isPositive) {
+                sentiment = Sentiments.POSITIVE;
+              } else if (sentiments.isUnkown) {
+                sentiment = Sentiments.UNKOWN;
+              } else {
+                setShowToast(true);
+              }
+
+              if (sentiment && annotate.length) {
+                const updated = [...annotate];
+                updated[index][7] = sentiment;
+
+                setSentiments(defaultSentiments);
+                setAnnotate(updated);
+              }
+            }}
+          >
+            Weiter
+          </IonButton>
         </IonToolbar>
       </IonCard>
 
