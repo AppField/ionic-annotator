@@ -16,10 +16,9 @@ import { ellipsisVertical } from "ionicons/icons";
 import { useAnnotateContext } from "../pages/AnnotatorManager";
 import MenuPopover from "./MenuPopover";
 
-const StyledContent = styled(IonContent)`
+const StyledDiv = styled.div`
   max-width: 1024px;
-  align-self: center;
-  padding: 1rem;
+  margin: 0 auto;
 `;
 
 const StyledToolbar = styled(IonToolbar)`
@@ -73,16 +72,18 @@ const Layout: React.FC<LayoutProps> = ({ children, title }) => {
             )}
           </StyledToolbar>
         </IonHeader>
-        <StyledContent>
-          <IonHeader collapse="condense">
-            <StyledToolbar>
-              <IonTitle size="large" color="primary">
-                {title}
-              </IonTitle>
-            </StyledToolbar>
-          </IonHeader>
-          {children}
-        </StyledContent>
+        <IonContent>
+          <StyledDiv>
+            <IonHeader collapse="condense">
+              <StyledToolbar>
+                <IonTitle size="large" color="primary">
+                  {title}
+                </IonTitle>
+              </StyledToolbar>
+            </IonHeader>
+            {children}
+          </StyledDiv>
+        </IonContent>
       </IonPage>
     </>
   );
