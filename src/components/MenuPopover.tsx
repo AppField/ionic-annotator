@@ -3,13 +3,14 @@ import { IonList, IonItem, IonLabel, IonIcon, IonAlert } from "@ionic/react";
 import { downloadOutline, trashOutline } from "ionicons/icons";
 import { useAnnotateContext } from "../pages/AnnotatorManager";
 import { downloadCsv } from "../utils/utils";
+import { AnnotateData } from "../Models/Data";
 
 interface MenuPopoverProps {
   onClick: () => any;
 }
 
 const MenuPopover: React.FC<MenuPopoverProps> = ({ onClick }) => {
-  const { annotate, setAnnotate } = useAnnotateContext();
+  const { data, setData } = useAnnotateContext();
   const [showAlert, setShowAlert] = useState(false);
 
   return (
@@ -23,7 +24,7 @@ const MenuPopover: React.FC<MenuPopoverProps> = ({ onClick }) => {
           {
             text: "Löschen",
             handler: () => {
-              setAnnotate([]);
+              setData(new AnnotateData());
               onClick();
             },
           },
@@ -41,7 +42,7 @@ const MenuPopover: React.FC<MenuPopoverProps> = ({ onClick }) => {
         <IonItem
           button
           onClick={() => {
-            downloadCsv(annotate);
+            downloadCsv(data.csv);
             onClick();
           }}
         >

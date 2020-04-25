@@ -48,7 +48,7 @@ const defaultSentiments = {
 };
 
 const Annotator: React.FC<AnnotatorProps> = ({ index }) => {
-  const { annotate, setAnnotate } = useAnnotateContext();
+  const { data, setData } = useAnnotateContext();
   const [showToast, setShowToast] = useState(false);
 
   const [sentiments, setSentiments] = useState<SentimentStates>(
@@ -67,7 +67,7 @@ const Annotator: React.FC<AnnotatorProps> = ({ index }) => {
     );
   }
 
-  const item = annotate ? annotate[index] : null;
+  const item = data ? data.csv[index] : null;
 
   return (
     <>
@@ -156,19 +156,20 @@ const Annotator: React.FC<AnnotatorProps> = ({ index }) => {
                 setShowToast(true);
               }
 
-              if (sentiment && annotate.length) {
-                const updated = [...annotate];
-                updated[index][7] = sentiment;
+              if (sentiment && data.csv.length) {
+                const updated = { ...data };
+                updated.csv[index][7] = sentiment;
 
                 setSentiments(defaultSentiments);
-                setAnnotate(updated);
+
+                setData(updated);
               }
             }}
           >
             Weiter
           </IonButton>
         </IonToolbar>
-      </IonCard>      
+      </IonCard>
       <IonToast
         isOpen={showToast}
         onDidDismiss={() => setShowToast(false)}

@@ -17,11 +17,11 @@ const StyledNumbers = styled.p`
 `;
 
 const Summary: React.FC = () => {
-  const { annotate } = useAnnotateContext();
+  const { data } = useAnnotateContext();
 
-  const annotated = annotate.findIndex((item) => item[7] === "") - 1;
+  const annotated = data.csv.findIndex((item) => item[7] === "");
 
-  const total = annotate.length - 1;
+  const total = data.csv.length;
 
   return (
     <StyledDiv>

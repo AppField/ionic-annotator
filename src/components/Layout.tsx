@@ -30,7 +30,7 @@ interface LayoutProps {
 }
 
 const Layout: React.FC<LayoutProps> = ({ children, title }) => {
-  const { annotate } = useAnnotateContext();
+  const { data } = useAnnotateContext();
   const [showPopover, setShowPopover] = useState<{
     isOpen: boolean;
     event: MouseEvent | undefined;
@@ -55,7 +55,7 @@ const Layout: React.FC<LayoutProps> = ({ children, title }) => {
         <IonHeader>
           <StyledToolbar>
             <IonTitle color="primary">{title}</IonTitle>
-            {annotate.length > 0 && (
+            {data.csv.length > 0 && (
               <IonButtons slot="end">
                 <IonButton
                   onClick={(event) =>

@@ -3,6 +3,7 @@ import styled from "styled-components";
 import { IonButton } from "@ionic/react";
 import { useAnnotateContext } from "../pages/AnnotatorManager";
 import { downloadCsv } from "../utils/utils";
+import { AnnotateData } from "../Models/Data";
 
 const StyledText = styled.p`
   font-size: 1.75rem;
@@ -15,7 +16,7 @@ const StyledButtonDiv = styled.div`
 `;
 
 const Gratulation: React.FC = () => {
-  const { annotate, setAnnotate } = useAnnotateContext();
+  const { data, setData } = useAnnotateContext();
   const [isDownloaded, setIsDownloaded] = useState(false);
 
   return (
@@ -28,7 +29,7 @@ const Gratulation: React.FC = () => {
           color="success"
           size="large"
           onClick={() => {
-            downloadCsv(annotate);
+            downloadCsv(data.csv);
             setIsDownloaded(true);
           }}
         >
@@ -40,7 +41,7 @@ const Gratulation: React.FC = () => {
             color="danger"
             size="large"
             onClick={() => {
-              setAnnotate([]);
+              setData(new AnnotateData());
             }}
           >
             Daten l&ouml;schen
