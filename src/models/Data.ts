@@ -5,14 +5,14 @@ export interface Column {
 
 export interface Data {
   toAnnotateColumn?: Column;
-  toLabel?: Column
+  annotationColumn?: Column
   header?: string[];
   csv: any[];
 }
 
 export class AnnotateData implements Data {
   toAnnotateColumn?: Column;
-  toLabel?: Column;
+  annotationColumn?: Column;
 
 
   constructor(public header: any[] = [], public csv: any[] = []) {

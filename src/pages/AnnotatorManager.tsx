@@ -11,7 +11,7 @@ import Annotator from "../components/Annotator";
 import { getLocalData } from "../localStorage";
 import Summary from "../components/Summary";
 import Gratulation from "../components/Gratulation";
-import { Data } from "../Models/Data";
+import { Data } from "../models/Data";
 
 interface AnnotateContextI {
   data: Data;

@@ -3,7 +3,7 @@ import { IonList, IonItem, IonLabel, IonIcon, IonAlert } from "@ionic/react";
 import { downloadOutline, trashOutline } from "ionicons/icons";
 import { useAnnotateContext } from "../pages/AnnotatorManager";
 import { downloadCsv } from "../utils/utils";
-import { AnnotateData } from "../Models/Data";
+import { AnnotateData } from "../models/Data";
 
 interface MenuPopoverProps {
   onClick: () => any;

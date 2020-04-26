@@ -3,7 +3,7 @@ import styled from "styled-components";
 import { IonButton } from "@ionic/react";
 import { useAnnotateContext } from "../pages/AnnotatorManager";
 import { downloadCsv } from "../utils/utils";
-import { AnnotateData } from "../Models/Data";
+import { AnnotateData } from "../models/Data";
 
 const StyledText = styled.p`
   font-size: 1.75rem;
