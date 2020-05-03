@@ -17,7 +17,6 @@ const MenuPopover: React.FC<MenuPopoverProps> = ({ onClick }) => {
     <>
       <IonAlert
         isOpen={showAlert}
-        // onDidDismiss={() => setShowAlert(false)}
         header="Daten wirklich löschen?"
         message="Die Daten werden unwiderruflich gelöscht."
         buttons={[
@@ -64,5 +63,3 @@ const MenuPopover: React.FC<MenuPopoverProps> = ({ onClick }) => {
 };
 
 export default MenuPopover;
-
-//setAnnotate([])

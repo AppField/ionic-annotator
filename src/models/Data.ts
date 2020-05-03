@@ -3,21 +3,25 @@ export interface Column {
   name: string;
 }
 
-export interface Data {
+export interface Data {  
+  header: string[];
+  csv: any[];
   toAnnotateColumn?: Column;
   annotationColumn?: Column
-  header?: string[];
-  csv: any[];
 }
 
 export class AnnotateData implements Data {
-  toAnnotateColumn?: Column;
-  annotationColumn?: Column;
 
-
-  constructor(public header: any[] = [], public csv: any[] = []) {
+  constructor(
+    public header: any[] = [],
+    public csv: any[] = [],
+    public toAnnotateColumn?: Column,
+    public annotationColumn?: Column
+  ) {
     this.header = header;
     this.csv = csv;
+    this.toAnnotateColumn = toAnnotateColumn;
+    this.annotationColumn = annotationColumn;
   }
 
 }

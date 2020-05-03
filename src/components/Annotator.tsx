@@ -48,7 +48,7 @@ const defaultSentiments = {
 };
 
 const Annotator: React.FC<AnnotatorProps> = ({ index }) => {
-  const { data, setData } = useAnnotateContext();
+  const { data, setData } = useAnnotateContext()!;
   const [showToast, setShowToast] = useState(false);
 
   const [sentiments, setSentiments] = useState<SentimentStates>(
@@ -82,7 +82,9 @@ const Annotator: React.FC<AnnotatorProps> = ({ index }) => {
         </IonCardHeader>
         <IonCardContent>
           <div className="ion-margin">
-            <StyledText>{item[6]}</StyledText>
+            {data.toAnnotateColumn && (
+              <StyledText>{item[data.toAnnotateColumn.index]}</StyledText>
+            )}
           </div>
         </IonCardContent>
 
@@ -158,11 +160,13 @@ const Annotator: React.FC<AnnotatorProps> = ({ index }) => {
 
               if (sentiment && data.csv.length) {
                 const updated = { ...data };
-                updated.csv[index][7] = sentiment;
+                if (data.annotationColumn) {
+                  updated.csv[index][data.annotationColumn.index] = sentiment;
 
-                setSentiments(defaultSentiments);
+                  setSentiments(defaultSentiments);
 
-                setData(updated);
+                  setData(updated);
+                }
               }
             }}
           >

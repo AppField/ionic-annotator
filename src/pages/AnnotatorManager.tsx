@@ -4,6 +4,7 @@ import React, {
   SetStateAction,
   Dispatch,
   useEffect,
+  createContext,
 } from "react";
 import Layout from "../components/Layout";
 import Uploader from "../components/Uploader";
@@ -23,7 +24,7 @@ const initialState: AnnotateContextI = {
   setData: (): void => {},
 };
 
-export const AnnotateContext = React.createContext(initialState);
+export const AnnotateContext = createContext<AnnotateContextI>(initialState);
 
 export const useAnnotateContext = (): AnnotateContextI => {
   return useContext(AnnotateContext);
@@ -36,12 +37,19 @@ const AnnotatorManager: React.FC = () => {
     localStorage.setItem("data", JSON.stringify(data));
   });
 
-  const nextItemIndex = data.csv.findIndex((item) => item[7] === "");
+  let nextItemIndex = 0;
+  if (data && data.annotationColumn) {
+    nextItemIndex = data.csv.findIndex(
+      (item: any[]) =>
+        data.annotationColumn && item[data.annotationColumn.index] === ""
+    );
+  }
+  console.log(nextItemIndex)
 
   return (
     <AnnotateContext.Provider value={{ data: data, setData: setData }}>
       <Layout title="Sentiment Annotator">
-        {data.csv.length === 0 ? (
+        {!data.toAnnotateColumn || !data.toAnnotateColumn ? (
           <Uploader />
         ) : nextItemIndex !== -1 ? (
           <>

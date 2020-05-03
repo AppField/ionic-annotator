@@ -245,7 +245,7 @@ const annotateColumnRules = (useExisting: boolean) => {
     required: {
       value: useExisting,
       message: (
-        <ErrorMessage message="Please select an existing column for you annotations" />
+        <ErrorMessage message="Please select an existing column for your annotations" />
       ),
     },
   };
